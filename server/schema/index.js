@@ -9,31 +9,31 @@ const {
 	GraphQLID
 } = graphql;
 
-const RepositoryType = new GraphQLObjectType({
-	name: 'Repository',
-	fields: () => ({
-		id: {
-			type: GraphQLID,
-			resolve: data => data[0].id
-		},
-		user: {
-			type: GraphQLString,
-			resolve: data => data[0].owner.login
-		},
-		url: {
-			type: GraphQLString,
-			resolve: data => data[0].url
-		},
-		language: {
-			type: GraphQLString,
-			resolve: data => data[0].language
-		},
-		watchers: {
-			type: GraphQLInt,
-			resolve: data => data[0].watchers
-		}
-	})
-});
+// const RepositoryType = new GraphQLObjectType({
+// 	name: 'Repository',
+// 	fields: () => ({
+// 		id: {
+// 			type: GraphQLID,
+// 			resolve: data => data[0].id
+// 		},
+// 		user: {
+// 			type: GraphQLString,
+// 			resolve: data => data[0].owner.login
+// 		},
+// 		url: {
+// 			type: GraphQLString,
+// 			resolve: data => data[0].url
+// 		},
+// 		language: {
+// 			type: GraphQLString,
+// 			resolve: data => data[0].language
+// 		},
+// 		watchers: {
+// 			type: GraphQLInt,
+// 			resolve: data => data[0].watchers
+// 		}
+// 	})
+// });
 
 const UserType = new GraphQLObjectType({
 	name: 'User',
