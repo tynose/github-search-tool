@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { SearchContext } from '../App';
 import Form from '../Form';
 import useInput from '../../hooks/useInput';
 import Input from '../Input';
@@ -37,17 +38,23 @@ const Button = styled.button`
 `;
 
 const SearchBar = ({ className }) => {
-	const { value: valueSearch, handleChange: handleChangeSearch } = useInput('');
+	const dispatch = useContext(SearchContext);
+	const { value: valueSearch, handleChange: handleChangeSearch } = useInput({
+		initialValue: '',
+		type: 'search'
+	});
 
 	const onSubmit = event => {
 		console.log(valueSearch);
-
 		event.preventDefault();
 	};
 
 	return (
 		<StyledForm className={className} onSubmit={onSubmit}>
-			<Button type='submit' aria-label='search'>
+			<Button
+				type='submit'
+				aria-label='search'
+				onClick={() => dispatch({ type: 'repo', payload: valueSearch })}>
 				<Icon icon={'search'} />
 			</Button>
 			<StyledInput

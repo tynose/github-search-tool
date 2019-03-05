@@ -4,16 +4,26 @@ import { getReposQuery } from '../../utils/queries';
 import { graphql } from 'react-apollo';
 import NavigationBar from '../NavigationBar';
 import { flexCenter } from '../../utils/styles/mixin';
-const Context = React.createContext();
+export const SearchContext = React.createContext();
 
-const appReducer = (state, { type, payload }) => {
+const initialState = {
+	search: '',
+	repositories: []
+};
+
+const reducer = (state, { type, payload }) => {
 	switch (type) {
-		case 'value': {
-			return state.map(value => {
-				return {
-					value
-				};
-			});
+		case 'search': {
+			return {
+				...state,
+				search: payload
+			};
+		}
+		case 'repo': {
+			return {
+				...state,
+				repositories: payload
+			};
 		}
 		default: {
 			return state;
@@ -28,16 +38,17 @@ const Container = styled.div`
 `;
 
 const App = props => {
-	const [state, dispatch] = useReducer(appReducer, []);
+	const [state, dispatch] = useReducer(reducer, initialState);
+
+	console.log(state);
 	console.log(props);
 
 	return (
-		<Context.Provider value={dispatch}>
+		<SearchContext.Provider value={dispatch}>
 			<Container>
 				<NavigationBar />
-				{state.map(repo => repo)}
 			</Container>
-		</Context.Provider>
+		</SearchContext.Provider>
 	);
 };
 

@@ -1,18 +1,22 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { SearchContext } from '../components/App';
 
-const useForm = initialValue => {
+const useInput = ({ initialValue, type }) => {
 	const [value, setValue] = useState(initialValue);
+	console.log(type);
 
+	const dispatch = useContext(SearchContext);
 	return {
 		value,
 		setValue,
 		handleChange: {
 			value,
-			onChange: event => {
-				setValue(event.target.value);
+			onChange: ({ target }) => {
+				dispatch({ type, payload: target.value });
+				setValue(target.value);
 			}
 		}
 	};
 };
 
-export default useForm;
+export default useInput;
