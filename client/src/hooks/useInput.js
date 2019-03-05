@@ -3,9 +3,8 @@ import { SearchContext } from '../components/App';
 
 const useInput = ({ initialValue, type }) => {
 	const [value, setValue] = useState(initialValue);
-	console.log(type);
+	const dispatch = useContext(SearchContext).dispatch;
 
-	const dispatch = useContext(SearchContext);
 	return {
 		value,
 		setValue,

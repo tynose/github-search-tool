@@ -38,30 +38,33 @@ const Button = styled.button`
 `;
 
 const SearchBar = ({ className }) => {
-	const dispatch = useContext(SearchContext);
+	const { dispatch, state } = useContext(SearchContext);
 	const { value: valueSearch, handleChange: handleChangeSearch } = useInput({
 		initialValue: '',
 		type: 'search'
 	});
 
 	const onSubmit = event => {
-		console.log(valueSearch);
 		event.preventDefault();
+		dispatch({
+			type: 'submited',
+			payload: {
+				submited: true || valueSearch !== state.search,
+				search: valueSearch
+			}
+		});
 	};
 
 	return (
 		<StyledForm className={className} onSubmit={onSubmit}>
-			<Button
-				type='submit'
-				aria-label='search'
-				onClick={() => dispatch({ type: 'repo', payload: valueSearch })}>
+			<Button type='submit' aria-label='search'>
 				<Icon icon={'search'} />
 			</Button>
 			<StyledInput
 				type='search'
 				name='search'
-				{...handleChangeSearch}
 				placeholder='search'
+				{...handleChangeSearch}
 			/>
 		</StyledForm>
 	);

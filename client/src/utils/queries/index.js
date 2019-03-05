@@ -1,6 +1,6 @@
 import { gql } from 'apollo-boost';
 
-const getReposQuery = gql`
+const GET_REPOS_QUERY = gql`
 	query($user: String) {
 		user(user: $user) {
 			user
@@ -17,4 +17,4 @@ const getReposQuery = gql`
 	}
 `;
 
-export { getReposQuery };
+export { GET_REPOS_QUERY };
