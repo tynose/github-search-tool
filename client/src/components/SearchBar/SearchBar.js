@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Form from '../Form';
-import Input from '../Input/Input';
+import useInput from '../../hooks/useInput';
+import Input from '../Input';
 import Icon from '../Icon';
 
 const StyledForm = styled(Form)`
@@ -36,24 +37,26 @@ const Button = styled.button`
 `;
 
 const SearchBar = ({ className }) => {
+	const { value: valueSearch, handleChange: handleChangeSearch } = useInput('');
+
+	const onSubmit = event => {
+		console.log(valueSearch);
+
+		event.preventDefault();
+	};
+
 	return (
-		<StyledForm
-			className={className}
-			initialValues={{ search: '' }}
-			render={({ onChange }) => (
-				<>
-					<StyledInput
-						type='search'
-						name='search'
-						onChange={onChange}
-						placeholder='search'
-					/>
-					<Button type='submit' aria-label='search'>
-						<Icon icon={'search'} />
-					</Button>
-				</>
-			)}
-		/>
+		<StyledForm className={className} onSubmit={onSubmit}>
+			<Button type='submit' aria-label='search'>
+				<Icon icon={'search'} />
+			</Button>
+			<StyledInput
+				type='search'
+				name='search'
+				{...handleChangeSearch}
+				placeholder='search'
+			/>
+		</StyledForm>
 	);
 };
 
