@@ -1,9 +1,32 @@
-import React, { Component } from 'react';
+import React from 'react';
+import styled from 'styled-components';
+import { getReposQuery } from '../../utils/queries';
+import { graphql } from 'react-apollo';
+import NavigationBar from '../NavigationBar';
+import { flexCenter } from '../../utils/styles/mixin';
 
-class App extends Component {
-	render() {
-		return <div>App</div>;
+const Container = styled.div`
+	width: 100vw;
+	height: 100vh;
+	${flexCenter}
+`;
+
+const App = props => {
+	console.log(props);
+
+	return (
+		<Container>
+			<NavigationBar />
+		</Container>
+	);
+};
+
+export default graphql(getReposQuery, {
+	options: props => {
+		return {
+			variables: {
+				user: 'tynose'
+			}
+		};
 	}
-}
-
-export default App;
+})(App);
