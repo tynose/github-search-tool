@@ -54,7 +54,7 @@ export const GlobalStyles = createGlobalStyle`
 
   p {
     font-size: 1rem;
-    line-height: 35px;
+    line-height: 21px;
   }
 
   @font-face {

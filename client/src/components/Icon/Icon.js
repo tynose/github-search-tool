@@ -1,34 +1,22 @@
-import React, { PureComponent } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Svg from '../Svg';
 
-class Icon extends PureComponent {
-	state = { importedIcon: '' };
+const Icon = ({ icon, className }) => {
+	const [importedIcon, setImportedIcon] = useState('');
 
-	async componentDidMount() {
-		await this.setIconValue();
-	}
+	useEffect(() => {
+		setIconValue();
+	}, [icon]);
 
-	async componentDidUpdate(prevProps) {
-		if (this.props.icon !== prevProps.icon) {
-			await this.setIconValue();
-		}
-	}
-
-	async setIconValue() {
-		const { icon } = this.props;
+	const setIconValue = async () => {
 		const importedIcon = await import(`./lib/${icon}.svg`);
 
-		this.setState({ importedIcon: importedIcon.default });
-	}
+		setImportedIcon(importedIcon.default);
+	};
 
-	render() {
-		const { className } = this.props;
-		const { importedIcon } = this.state;
-
-		return <Svg className={className} src={importedIcon} />;
-	}
-}
+	return <Svg className={className} src={importedIcon} />;
+};
 
 Icon.propTypes = {
 	icon: PropTypes.string,
