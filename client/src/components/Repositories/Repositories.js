@@ -21,6 +21,14 @@ const Main = styled.main`
 	background-color: ${props => props.theme.colors.ghostwhite};
 `;
 
+const List = styled.ul`
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin-top: 30px;
+	padding: 10px;
+`;
+
 const Repositories = () => {
 	const { submited, search } = useContext(SearchContext).state;
 
@@ -33,8 +41,6 @@ const Repositories = () => {
 					fetchPolicy='network-only'>
 					{({ data, loading, error }) => {
 						const { user } = data;
-						console.log(user);
-
 						return loading ? (
 							<Loader />
 						) : error ? (
@@ -49,12 +55,12 @@ const Repositories = () => {
 									account={user.account}
 								/>
 								<Main>
-									<ul>
-										<h3>Repositories</h3>
+									<h3>Repositories</h3>
+									<List>
 										{user.repositories.map(props => (
 											<RepositoryItem key={props.id} {...props} />
 										))}
-									</ul>
+									</List>
 								</Main>
 							</Fragment>
 						);
