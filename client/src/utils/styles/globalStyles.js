@@ -48,12 +48,12 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   span {
-    font-size: 0.75rem;
+    font-size: 1.5rem;
     font-weight: 500;
   }
 
   p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     line-height: 35px;
   }
 

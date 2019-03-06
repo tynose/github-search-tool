@@ -20,9 +20,17 @@ const RepositoryType = new GraphQLObjectType({
 			type: GraphQLString,
 			resolve: data => data.url
 		},
+		name: {
+			type: GraphQLString,
+			resolve: data => data.name
+		},
 		language: {
 			type: GraphQLString,
 			resolve: data => data.language
+		},
+		description: {
+			type: GraphQLString,
+			resolve: data => data.description
 		},
 		watchers: {
 			type: GraphQLInt,
@@ -43,6 +51,7 @@ const UserType = new GraphQLObjectType({
 			resolve: data => data[0].owner.id
 		},
 		user: { type: GraphQLString, resolve: data => data[0].owner.login },
+		account: { type: GraphQLString, resolve: data => data[0].owner.html_url },
 		avatar: { type: GraphQLString, resolve: data => data[0].owner.avatar_url },
 		repositories: {
 			type: new GraphQLList(RepositoryType),

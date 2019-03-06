@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Icon from '../../components/Icon';
 import SearchBar from '../SearchBar';
 
-const Container = styled.nav`
+const Container = styled.header`
 	width: 100%;
 	padding: 10px 16px;
 	background-color: ${props => props.theme.colors.darkslategray};

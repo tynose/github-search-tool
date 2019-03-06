@@ -6,12 +6,15 @@ const GET_REPOS_QUERY = gql`
 			user
 			id
 			avatar
+			account
 			repositories {
 				url
 				id
+				name
 				language
 				watchers
 				stars
+				description
 			}
 		}
 	}

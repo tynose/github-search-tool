@@ -1,5 +1,12 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import { flexCenter } from '../../utils/styles/mixin';
+
+const Container = styled.div`
+	width: 100%;
+	height: calc(100vh - 200px);
+	${flexCenter}
+`;
 
 const Spin = keyframes`
   0% { 
@@ -28,6 +35,10 @@ const Spinner = styled.div`
 	animation: ${Spin} 700ms infinite linear;
 `;
 
-const LoaderSpinner = () => <Spinner />;
+const LoaderSpinner = () => (
+	<Container>
+		<Spinner />
+	</Container>
+);
 
 export default LoaderSpinner;
