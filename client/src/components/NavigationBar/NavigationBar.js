@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Icon from '../../components/Icon';
+import Link from '../Link';
 import SearchBar from '../SearchBar';
+import { SearchContext } from '../App';
 
 const Container = styled.header`
 	width: 100%;
@@ -19,11 +21,26 @@ const StyledIcon = styled(Icon)`
 	height: 28px;
 `;
 
-const NavigationBar = () => (
-	<Container>
-		<StyledIcon icon={'github'} />
-		<SearchBar />
-	</Container>
-);
+const NavigationBar = () => {
+	const { dispatch } = useContext(SearchContext);
+
+	return (
+		<Container>
+			<Link
+				onClick={() => {
+					dispatch({
+						type: 'submited',
+						payload: {
+							submited: false,
+							search: ''
+						}
+					});
+				}}>
+				<StyledIcon icon={'github'} />
+			</Link>
+			<SearchBar />
+		</Container>
+	);
+};
 
 export default NavigationBar;

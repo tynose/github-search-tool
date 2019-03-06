@@ -38,10 +38,14 @@ const Button = styled.button`
 `;
 
 const SearchBar = ({ className }) => {
-	const { dispatch, state } = useContext(SearchContext);
-	const { value: valueSearch, handleChange: handleChangeSearch } = useInput({
+	const { dispatch } = useContext(SearchContext);
+	const {
+		value: valueSearch,
+		handleChange: handleChangeSearch,
+		reset
+	} = useInput({
 		initialValue: '',
-		type: 'search'
+		type: 'submited'
 	});
 
 	const onSubmit = event => {
@@ -49,10 +53,11 @@ const SearchBar = ({ className }) => {
 		dispatch({
 			type: 'submited',
 			payload: {
-				submited: true || valueSearch !== state.search,
+				submited: true,
 				search: valueSearch
 			}
 		});
+		reset();
 	};
 
 	return (

@@ -32,8 +32,6 @@ const Container = styled.div`
 
 const App = () => {
 	const [state, dispatch] = useReducer(reducer, initialState);
-	console.log(state);
-
 	return (
 		<SearchContext.Provider value={{ state, dispatch }}>
 			<Container>

@@ -39,7 +39,6 @@ const Repositories = () => {
 					variables={{ user: search }}
 					fetchPolicy='network-only'>
 					{({ data, loading, error }) => {
-						const { user } = data;
 						return loading ? (
 							<RepositoryList>
 								<Loader />
@@ -51,10 +50,10 @@ const Repositories = () => {
 								</NoMatch>
 							</RepositoryList>
 						) : (
-							<RepositoryList {...user}>
+							<RepositoryList {...data.user}>
 								<h3>Repositories</h3>
 								<List>
-									{user.repositories.map(props => (
+									{data.user.repositories.map(props => (
 										<RepositoryItem key={props.id} {...props} />
 									))}
 								</List>

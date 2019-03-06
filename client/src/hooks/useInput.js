@@ -1,17 +1,15 @@
-import { useState, useContext } from 'react';
-import { SearchContext } from '../components/App';
+import { useState } from 'react';
 
-const useInput = ({ initialValue, type }) => {
+const useInput = ({ initialValue }) => {
 	const [value, setValue] = useState(initialValue);
-	const dispatch = useContext(SearchContext).dispatch;
 
 	return {
 		value,
 		setValue,
+		reset: () => setValue(''),
 		handleChange: {
 			value,
 			onChange: ({ target }) => {
-				dispatch({ type, payload: target.value });
 				setValue(target.value);
 			}
 		}

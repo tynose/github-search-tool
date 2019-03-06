@@ -10,7 +10,6 @@ const Main = styled.main`
 `;
 
 const RepositoriesList = ({ children, user, avatar, account }) => {
-	console.log(user);
 	return (
 		<Fragment>
 			<SideBar user={user} avatar={avatar} account={account} />
