@@ -33,6 +33,8 @@ const Repositories = () => {
 					fetchPolicy='network-only'>
 					{({ data, loading, error }) => {
 						const { user } = data;
+						console.log(user);
+
 						return loading ? (
 							<Loader />
 						) : error ? (

@@ -18,7 +18,7 @@ const RepositoryType = new GraphQLObjectType({
 		},
 		url: {
 			type: GraphQLString,
-			resolve: data => data.url
+			resolve: data => data.html_url
 		},
 		name: {
 			type: GraphQLString,

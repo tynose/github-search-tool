@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Link from '../Link';
 
 const ListItem = styled.li`
@@ -12,8 +12,15 @@ const ListItem = styled.li`
 const Container = styled.div`
 	background-color: white;
 	padding: 20px;
-	border-radius: 4px;
-	border: 1px solid ${props => props.theme.colors.gray};
+	display: flex;
+	${props =>
+		props.wrapper &&
+		css`
+			border-radius: 4px;
+			border: 1px solid ${props => props.theme.colors.gray};
+			flex-direction: column;
+			margin-top: 10px;
+		`};
 `;
 
 const RepositoriesItem = ({
@@ -22,14 +29,15 @@ const RepositoriesItem = ({
 	language,
 	watchers,
 	stars,
-	descripton,
+	description,
 	name
 }) => {
 	return (
 		<ListItem>
-			<p>{name}</p>
-			<Container>
-				<Link href={url}>{url.substring(29)}</Link>
+			<h4>{name}</h4>
+			<Container wrapper>
+				<Link href={url}>{url.substring(19)}</Link>
+				<p>{description}</p>
 			</Container>
 		</ListItem>
 	);
