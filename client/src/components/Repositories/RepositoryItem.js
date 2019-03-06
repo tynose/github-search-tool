@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 import Link from '../Link';
 import Icon from '../Icon';
 import * as hex from 'text-hex';
+import media from '../../utils/styles/media';
 
 const ListItem = styled.li`
 	list-style: none;
@@ -13,9 +14,9 @@ const ListItem = styled.li`
 	p {
 		font-size: 0.8rem;
 	}
-	&:last-child {
-		margin-right: auto;
-	}
+	${media.desktop`
+		width: 100%;
+  `}
 `;
 
 const Container = styled.div`
@@ -33,16 +34,15 @@ const Container = styled.div`
 	${props =>
 		props.specs &&
 		css`
-			justify-content: space-between;
-			width: 200px;
 			margin-top: 20px;
 		`};
 	${props =>
 		props.spec &&
 		css`
-			min-width: 50px;
+			min-width: 40px;
+			margin-right: 25px;
 			display: flex;
-			justify-content: space-evenly;
+			justify-content: space-between;
 			align-items: center;
 		`};
 `;
@@ -65,7 +65,7 @@ const RepositoriesItem = ({
 }) => {
 	return (
 		<ListItem>
-			<h4>{name}</h4>
+			<h5>{name}</h5>
 			<Container wrapper>
 				<Link href={url}>Visit repo</Link>
 				<p>{description}</p>
@@ -77,12 +77,12 @@ const RepositoriesItem = ({
 						</Container>
 					)}
 					<Container spec>
-						<p>{watchers}</p>
 						<Icon icon={'binoculars'} />
+						<p>{watchers}</p>
 					</Container>
 					<Container spec>
-						<p>{stars}</p>
 						<Icon icon={'star'} />
+						<p>{stars}</p>
 					</Container>
 				</Container>
 			</Container>
