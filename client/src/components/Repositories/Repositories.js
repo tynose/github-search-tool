@@ -5,14 +5,20 @@ import { SearchContext } from '../App';
 import styled from 'styled-components';
 import Loader from '../Loader';
 import RepositoryItem from './RepositoryItem';
+import NoMatch from '../NoMatch';
+import { flexCenter } from '../../utils/styles/mixin';
 
-const Section = styled.section``;
+const Section = styled.section`
+	width: 100vw;
+	margin-top: 100px;
+	${flexCenter};
+`;
 
 const Repositories = () => {
 	const { submited, search } = useContext(SearchContext).state;
 
 	return (
-		<div>
+		<Section>
 			{submited && (
 				<Query
 					query={GET_REPOS_QUERY}
@@ -24,18 +30,21 @@ const Repositories = () => {
 						return loading ? (
 							<Loader />
 						) : error ? (
-							<p>sorry no user's</p>
+							<NoMatch>
+								<p>sorry no user's</p>
+							</NoMatch>
 						) : (
-							<Section>
+							<div>
+								<img src={data.user.avatar} />
 								{data.user.repositories.map(props => (
 									<RepositoryItem {...props} />
 								))}
-							</Section>
+							</div>
 						);
 					}}
 				</Query>
 			)}
-		</div>
+		</Section>
 	);
 };
 
