@@ -1,24 +1,17 @@
-import React, { useContext, Fragment } from 'react';
+import React, { useContext } from 'react';
 import { GET_REPOS_QUERY } from '../../utils/queries';
 import { Query } from 'react-apollo';
 import { SearchContext } from '../App';
 import styled from 'styled-components';
 import Loader from '../Loader';
 import RepositoryItem from './RepositoryItem';
+import RepositoryList from './RepositoryList';
 import NoMatch from '../NoMatch';
-import SideBar from '../SideBar';
 
 const Section = styled.section`
 	width: 100%;
 	margin-top: 60px;
 	display: flex;
-`;
-
-const Main = styled.main`
-	width: calc(100% - 300px);
-	min-height: 100vh;
-	padding: 50px;
-	background-color: ${props => props.theme.colors.ghostwhite};
 `;
 
 const List = styled.ul`
@@ -34,7 +27,13 @@ const Repositories = () => {
 
 	return (
 		<Section>
-			{submited && (
+			{!submited ? (
+				<RepositoryList>
+					<NoMatch>
+						<h3>Search for a user to view their repositories</h3>
+					</NoMatch>
+				</RepositoryList>
+			) : (
 				<Query
 					query={GET_REPOS_QUERY}
 					variables={{ user: search }}
@@ -42,27 +41,24 @@ const Repositories = () => {
 					{({ data, loading, error }) => {
 						const { user } = data;
 						return loading ? (
-							<Loader />
+							<RepositoryList>
+								<Loader />
+							</RepositoryList>
 						) : error ? (
-							<NoMatch>
-								<p>sorry no user's</p>
-							</NoMatch>
+							<RepositoryList>
+								<NoMatch>
+									<h3>Ooops... It looks like there are no users</h3>
+								</NoMatch>
+							</RepositoryList>
 						) : (
-							<Fragment>
-								<SideBar
-									user={user.user}
-									avatar={user.avatar}
-									account={user.account}
-								/>
-								<Main>
-									<h3>Repositories</h3>
-									<List>
-										{user.repositories.map(props => (
-											<RepositoryItem key={props.id} {...props} />
-										))}
-									</List>
-								</Main>
-							</Fragment>
+							<RepositoryList {...user}>
+								<h3>Repositories</h3>
+								<List>
+									{user.repositories.map(props => (
+										<RepositoryItem key={props.id} {...props} />
+									))}
+								</List>
+							</RepositoryList>
 						);
 					}}
 				</Query>

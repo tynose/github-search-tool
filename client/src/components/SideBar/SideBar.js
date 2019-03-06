@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Image from '../Image';
+import github from '../../assets/images/GitHub.png';
 import Link from '../Link';
 
 const Aside = styled.aside`
@@ -45,6 +46,12 @@ const SideBar = ({ user, avatar, account }) => {
 			</Container>
 		</Aside>
 	);
+};
+
+SideBar.defaultProps = {
+	user: 'Github',
+	avatar: github,
+	account: 'https://github.com'
 };
 
 export default SideBar;

@@ -16,11 +16,11 @@ const StyledIcon = styled(Icon)`
 	margin-bottom: 50px;
 `;
 
-const NoMatch = () => {
+const NoMatch = ({ children }) => {
 	return (
 		<Container>
 			<StyledIcon icon={'octocat'} />
-			<h3>Ooops... It looks like there are no users</h3>
+			{children}
 		</Container>
 	);
 };
