@@ -4,6 +4,7 @@ import { Query } from 'react-apollo';
 import { SearchContext } from '../App';
 import styled from 'styled-components';
 import Loader from '../Loader';
+import RepositoryItem from './RepositoryItem';
 
 const Section = styled.section``;
 
@@ -26,7 +27,9 @@ const Repositories = () => {
 							<p>sorry no user's</p>
 						) : (
 							<Section>
-								<p>yay</p>
+								{data.user.repositories.map(props => (
+									<RepositoryItem {...props} />
+								))}
 							</Section>
 						);
 					}}
