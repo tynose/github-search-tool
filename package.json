@@ -6,8 +6,9 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "node server",
+		"start:dev": "nodemon server",
 		"init": "concurrently \"yarn\" \"cd client && yarn\"",
-		"dev": "concurrently \"yarn start\" \"cd client && yarn start\"",
+		"dev": "concurrently \"yarn run start:dev\" \"cd client && yarn start\"",
 		"heroku-postbuild": "cd client && npm install && npm run build"
 	},
 	"repository": {

@@ -72,8 +72,8 @@ const RootQuery = new GraphQLObjectType({
 				const response = await fetch(
 					`https://api.github.com/users/${
 						args.user
-					}/repos?page=1&per_page=10` ||
-						`https://api.github.com/orgs/${args.user}/repos?page=1&per_page=10`
+					}/repos?page=1&per_page=20` ||
+						`https://api.github.com/orgs/${args.user}/repos?page=1&per_page=20`
 				);
 				return response.json();
 			}
