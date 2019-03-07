@@ -7,15 +7,21 @@ import Form from '../Form';
 import useInput from '../../hooks/useInput';
 import Input from '../Input';
 import Icon from '../Icon';
+import media from '../../utils/styles/media';
 
 const StyledForm = styled(Form)`
 	width: 65%;
 	position: relative;
 	margin: 0 50px;
+	${media.phone`
+		width: 100%;
+		margin: 0 25px;
+	`}
 `;
 
 const StyledInput = styled(Input)`
 	width: 100%;
+	min-width: 175px;
 	padding: 8px 14px 8px 40px;
 	background-color: ${props => props.theme.colors.lightslategray};
 	&::placeholder {

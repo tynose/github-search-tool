@@ -39,6 +39,11 @@ const Container = styled.div`
     border-left: 1px solid ${props => props.theme.colors.gray};
 		justify-content: center;
   `}
+	${media.phone`
+			* {
+				font-size: 0.8rem;
+			}
+  `}
 `;
 
 const Profile = ({ user, avatar, account }) => {
