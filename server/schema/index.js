@@ -5,32 +5,40 @@ const {
 	GraphQLSchema,
 	GraphQLObjectType,
 	GraphQLString,
-	GraphQLInt,
-	GraphQLID
+	GraphQLList,
+	GraphQLInt
 } = graphql;
 
 const RepositoryType = new GraphQLObjectType({
 	name: 'Repository',
 	fields: () => ({
 		id: {
-			type: GraphQLID,
-			resolve: data => data[0].id
-		},
-		user: {
-			type: GraphQLString,
-			resolve: data => data[0].owner.login
+			type: GraphQLInt,
+			resolve: data => data.id
 		},
 		url: {
 			type: GraphQLString,
-			resolve: data => data[0].url
+			resolve: data => data.html_url
+		},
+		name: {
+			type: GraphQLString,
+			resolve: data => data.name
 		},
 		language: {
 			type: GraphQLString,
-			resolve: data => data[0].language
+			resolve: data => data.language
+		},
+		description: {
+			type: GraphQLString,
+			resolve: data => data.description
 		},
 		watchers: {
 			type: GraphQLInt,
-			resolve: data => data[0].watchers
+			resolve: data => data.watchers
+		},
+		stars: {
+			type: GraphQLInt,
+			resolve: data => data.stargazers_count
 		}
 	})
 });
@@ -39,12 +47,15 @@ const UserType = new GraphQLObjectType({
 	name: 'User',
 	fields: () => ({
 		id: {
-			type: GraphQLID,
-			resolve: data => data[0].id
+			type: GraphQLInt,
+			resolve: data => data[0].owner.id
 		},
-		user: {
-			type: GraphQLString,
-			resolve: data => data[0].owner.login
+		user: { type: GraphQLString, resolve: data => data[0].owner.login },
+		account: { type: GraphQLString, resolve: data => data[0].owner.html_url },
+		avatar: { type: GraphQLString, resolve: data => data[0].owner.avatar_url },
+		repositories: {
+			type: new GraphQLList(RepositoryType),
+			resolve: data => data.map(repo => repo)
 		}
 	})
 });
@@ -59,7 +70,10 @@ const RootQuery = new GraphQLObjectType({
 			},
 			resolve: async (root, args) => {
 				const response = await fetch(
-					`https://api.github.com/users/${args.user}/repos`
+					`https://api.github.com/users/${
+						args.user
+					}/repos?page=1&per_page=20` ||
+						`https://api.github.com/orgs/${args.user}/repos?page=1&per_page=20`
 				);
 				return response.json();
 			}
