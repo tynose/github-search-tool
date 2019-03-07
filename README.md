@@ -6,7 +6,7 @@
 
 ## Hosted App
 
-- Check out the app at [this link](https://tynose.github.io/shopfiy-web-engineer-challenge-2019/)
+- Check out the app at [this link](https://githubsearchtool.herokuapp.com)
 
 ## System Requirements
 
