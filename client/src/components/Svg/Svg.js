@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -10,20 +10,12 @@ const Wrapper = styled.span`
 	align-items: center;
 	flex-direction: column;
 `;
-
-class Svg extends Component {
-	parseSource(src) {
+const Svg = ({ src, ...others }) => {
+	const parseSource = src => {
 		return { __html: src };
-	}
-
-	render() {
-		const { src, ...others } = this.props;
-
-		return (
-			<Wrapper dangerouslySetInnerHTML={this.parseSource(src)} {...others} />
-		);
-	}
-}
+	};
+	return <Wrapper dangerouslySetInnerHTML={parseSource(src)} {...others} />;
+};
 
 Svg.propTypes = {
 	src: PropTypes.string.isRequired

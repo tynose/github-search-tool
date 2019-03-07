@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ProfileContainer from '../ProfileContainer';
 import media from '../../utils/styles/media';
@@ -21,6 +22,12 @@ const RepositoriesList = ({ children, user, avatar, account }) => {
 			<Main>{children}</Main>
 		</Fragment>
 	);
+};
+
+RepositoriesList.propTypes = {
+	user: PropTypes.string,
+	avatar: PropTypes.string,
+	account: PropTypes.string
 };
 
 export default RepositoriesList;

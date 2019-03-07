@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Img = styled.img`
@@ -14,5 +15,11 @@ const Img = styled.img`
 const Image = ({ src, alt, className, ...others }) => (
 	<Img className={className} src={src} alt={alt} {...others} />
 );
+
+Image.propTypes = {
+	src: PropTypes.string.isRequired,
+	alt: PropTypes.string.isRequired,
+	className: PropTypes.string.isRequired
+};
 
 export default Image;

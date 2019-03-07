@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import Link from '../Link';
 import Icon from '../Icon';
@@ -45,6 +46,9 @@ const Container = styled.div`
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
+			p {
+				margin-left: 10px;
+			}
 		`};
 `;
 
@@ -88,5 +92,14 @@ const RepositoriesItem = ({
 		</Container>
 	</ListItem>
 );
+
+RepositoriesItem.propTypes = {
+	description: PropTypes.string,
+	url: PropTypes.string,
+	language: PropTypes.string,
+	watchers: PropTypes.number.isRequired,
+	stars: PropTypes.number.isRequired,
+	name: PropTypes.string.isRequired
+};
 
 export default RepositoriesItem;

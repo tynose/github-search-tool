@@ -33,7 +33,7 @@ const Container = styled.div`
 		height: auto;
 		background-color: white;
 		display: flex;
-		border-bottom: 1px solid ${props => props.theme.colors.gray}
+		border-bottom: 1px solid ${props => props.theme.colors.gray};
   `}
 `;
 

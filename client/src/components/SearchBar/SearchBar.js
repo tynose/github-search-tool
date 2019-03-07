@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { SearchContext } from '../App';
@@ -46,11 +47,8 @@ const SearchBar = props => {
 		handleChange: handleChangeSearch,
 		reset
 	} = useInput({
-		initialValue: '',
-		type: 'submited'
+		initialValue: ''
 	});
-
-	console.log(props);
 
 	const onSubmit = event => {
 		event.preventDefault();
@@ -78,6 +76,10 @@ const SearchBar = props => {
 			/>
 		</StyledForm>
 	);
+};
+
+SearchBar.propTypes = {
+	history: PropTypes.object
 };
 
 export default withRouter(SearchBar);

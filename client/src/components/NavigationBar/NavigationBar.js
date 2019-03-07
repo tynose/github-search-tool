@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import Icon from '../../components/Icon';
@@ -8,7 +9,7 @@ import { SearchContext } from '../App';
 
 const Container = styled.header`
 	width: 100%;
-	padding: 10px 16px;
+	padding: 10px 40px;
 	background-color: ${props => props.theme.colors.darkslategray};
 	position: fixed;
 	top: 0;
@@ -43,6 +44,10 @@ const NavigationBar = props => {
 			<SearchBar />
 		</Container>
 	);
+};
+
+NavigationBar.propTypes = {
+	history: PropTypes.object
 };
 
 export default withRouter(NavigationBar);

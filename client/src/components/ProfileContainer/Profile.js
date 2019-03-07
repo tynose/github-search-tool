@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Image from '../Image';
 import github from '../../assets/images/GitHub.png';
@@ -56,6 +57,12 @@ Profile.defaultProps = {
 	user: 'Github',
 	avatar: github,
 	account: 'https://github.com'
+};
+
+Profile.propTypes = {
+	user: PropTypes.string.isRequired,
+	avatar: PropTypes.string.isRequired,
+	account: PropTypes.string.isRequired
 };
 
 export default Profile;
