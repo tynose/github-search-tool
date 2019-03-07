@@ -2,7 +2,7 @@
 
 [![|](./client/src/assets/images/githubsmall.png)]()
 
-- This a application built using Grapql, Apollo client, React, Styled Components and a Node API servering up a Graphql endpoint. This Endpoint hits github's api and return a list of repositories associated to the queried user or organization. Additionally, the new React integrations of hooks was used for a majority of the components built in this application.
+- This a application built using Grapql, Apollo client, React, Styled Components and a Node API servering up a Graphql endpoint. This Endpoint hits github's api and returns a list of repositories associated to the queried user or organization. Additionally, the new React integrations of hooks were used for a majority of the components built in this application.
 
 ## Hosted App
 
