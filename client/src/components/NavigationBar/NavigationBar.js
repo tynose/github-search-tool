@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import Icon from '../../components/Icon';
 import Link from '../Link';
@@ -21,13 +22,14 @@ const StyledIcon = styled(Icon)`
 	height: 28px;
 `;
 
-const NavigationBar = () => {
+const NavigationBar = props => {
 	const { dispatch } = useContext(SearchContext);
 
 	return (
 		<Container>
 			<Link
 				onClick={() => {
+					props.history.push('/');
 					dispatch({
 						type: 'submited',
 						payload: {
@@ -43,4 +45,4 @@ const NavigationBar = () => {
 	);
 };
 
-export default NavigationBar;
+export default withRouter(NavigationBar);

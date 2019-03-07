@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import { SearchContext } from '../App';
 import Form from '../Form';
@@ -37,8 +38,9 @@ const Button = styled.button`
 	border: none;
 `;
 
-const SearchBar = ({ className }) => {
+const SearchBar = props => {
 	const { dispatch } = useContext(SearchContext);
+
 	const {
 		value: valueSearch,
 		handleChange: handleChangeSearch,
@@ -48,8 +50,11 @@ const SearchBar = ({ className }) => {
 		type: 'submited'
 	});
 
+	console.log(props);
+
 	const onSubmit = event => {
 		event.preventDefault();
+		props.history.push(`/${valueSearch}`);
 		dispatch({
 			type: 'submited',
 			payload: {
@@ -61,7 +66,7 @@ const SearchBar = ({ className }) => {
 	};
 
 	return (
-		<StyledForm className={className} onSubmit={onSubmit}>
+		<StyledForm onSubmit={onSubmit}>
 			<Button type='submit' aria-label='search'>
 				<Icon icon={'search'} />
 			</Button>
@@ -75,4 +80,4 @@ const SearchBar = ({ className }) => {
 	);
 };
 
-export default SearchBar;
+export default withRouter(SearchBar);

@@ -7,10 +7,14 @@ const StyledLink = styled.a`
 	padding: 10px 0;
 `;
 
-const Link = ({ children, ...others }) => (
-	<StyledLink {...others} target='_blank'>
+const Link = ({ children, isExternal, ...others }) => (
+	<StyledLink {...others} target={isExternal ? '_blank' : '_self'}>
 		{children}
 	</StyledLink>
 );
+
+Link.defaultProps = {
+	isExternal: true
+};
 
 export default Link;

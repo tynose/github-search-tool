@@ -6,7 +6,8 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "node server",
-		"start:dev": "nodemon server"
+		"dev": "concurrently \"npm start\" \"cd client && yarn start\"",
+		"heroku-postbuild": "cd client && npm install && npm run build"
 	},
 	"repository": {
 		"type": "git",
@@ -25,5 +26,8 @@
 		"graphql": "^14.1.1",
 		"node-fetch": "^2.3.0",
 		"nodemon": "^1.18.10"
+	},
+	"devDependencies": {
+		"concurrently": "^4.1.0"
 	}
 }

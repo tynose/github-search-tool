@@ -66,18 +66,15 @@ const RootQuery = new GraphQLObjectType({
 		user: {
 			type: UserType,
 			args: {
-				user: { type: GraphQLString },
-				select: { type: GraphQLString }
+				user: { type: GraphQLString }
 			},
 			resolve: async (root, args) => {
 				const response = await fetch(
 					`https://api.github.com/users/${
 						args.user
-					}/repos?page=2&per_page=10` ||
-						`https://api.github.com/orgs/${args.user}/repos?page=2&per_page=100`
+					}/repos?page=1&per_page=10` ||
+						`https://api.github.com/orgs/${args.user}/repos?page=1&per_page=10`
 				);
-				console.log(response);
-
 				return response.json();
 			}
 		}

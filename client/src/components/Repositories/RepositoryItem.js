@@ -35,6 +35,7 @@ const Container = styled.div`
 		props.specs &&
 		css`
 			margin-top: 20px;
+			flex-wrap: wrap;
 		`};
 	${props =>
 		props.spec &&
@@ -62,32 +63,30 @@ const RepositoriesItem = ({
 	stars,
 	description,
 	name
-}) => {
-	return (
-		<ListItem>
-			<h5>{name}</h5>
-			<Container wrapper>
-				<Link href={url}>Visit repo</Link>
-				<p>{description}</p>
-				<Container specs>
-					{language && (
-						<Container spec>
-							<Language color={language} />
-							<p>{language}</p>
-						</Container>
-					)}
+}) => (
+	<ListItem>
+		<h5>{name}</h5>
+		<Container wrapper>
+			<Link href={url}>Visit repo</Link>
+			<p>{description}</p>
+			<Container specs>
+				{language && (
 					<Container spec>
-						<Icon icon={'binoculars'} />
-						<p>{watchers}</p>
+						<Language color={language} />
+						<p>{language}</p>
 					</Container>
-					<Container spec>
-						<Icon icon={'star'} />
-						<p>{stars}</p>
-					</Container>
+				)}
+				<Container spec>
+					<Icon icon={'binoculars'} />
+					<p>{watchers}</p>
+				</Container>
+				<Container spec>
+					<Icon icon={'star'} />
+					<p>{stars}</p>
 				</Container>
 			</Container>
-		</ListItem>
-	);
-};
+		</Container>
+	</ListItem>
+);
 
 export default RepositoriesItem;

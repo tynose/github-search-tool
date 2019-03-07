@@ -10,6 +10,7 @@ const Main = styled.main`
 	background-color: ${props => props.theme.colors.ghostwhite};
 	${media.tablet`
     width: 100%;
+		padding: 10px;
   `}
 `;
 

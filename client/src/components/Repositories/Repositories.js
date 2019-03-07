@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { withRouter } from 'react-router-dom';
 import { GET_REPOS_QUERY } from '../../utils/queries';
 import { Query } from 'react-apollo';
 import { SearchContext } from '../App';
@@ -26,9 +27,8 @@ const List = styled.ul`
 	padding: 10px;
 `;
 
-const Repositories = () => {
+const Repositories = props => {
 	const { submited, search } = useContext(SearchContext).state;
-
 	return (
 		<Section>
 			{!submited ? (
@@ -42,8 +42,8 @@ const Repositories = () => {
 					query={GET_REPOS_QUERY}
 					variables={{ user: search }}
 					fetchPolicy='network-only'>
-					{({ data, loading, error }) => {
-						return loading ? (
+					{({ data, loading, error }) =>
+						loading ? (
 							<RepositoryList>
 								<Loader />
 							</RepositoryList>
@@ -62,12 +62,12 @@ const Repositories = () => {
 									))}
 								</List>
 							</RepositoryList>
-						);
-					}}
+						)
+					}
 				</Query>
 			)}
 		</Section>
 	);
 };
 
-export default Repositories;
+export default withRouter(Repositories);

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import NavigationBar from '../NavigationBar';
 import Repositories from '../Repositories';
 import { flexCenter } from '../../utils/styles/mixin';
+import { Route, Switch } from 'react-router-dom';
 export const SearchContext = React.createContext();
 
 const initialState = {
@@ -34,10 +35,12 @@ const App = () => {
 	const [state, dispatch] = useReducer(reducer, initialState);
 	return (
 		<SearchContext.Provider value={{ state, dispatch }}>
-			<Container>
-				<NavigationBar />
-				<Repositories />
-			</Container>
+			<NavigationBar />
+			<Switch>
+				<Route exact path={'/'} render={() => <Repositories />} />
+				<Route exact path={'/:user'} render={() => <Repositories />} />
+			</Switch>
+			<Container />
 		</SearchContext.Provider>
 	);
 };
