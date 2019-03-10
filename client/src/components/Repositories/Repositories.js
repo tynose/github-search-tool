@@ -9,6 +9,8 @@ import RepositoryItem from './RepositoryItem';
 import RepositoryList from './RepositoryList';
 import NoMatch from '../NoMatch';
 import media from '../../utils/styles/media';
+import { flexCenter } from '../../utils/styles/mixin';
+import { url } from '../../utils/constants/api';
 
 const Section = styled.section`
 	width: 100%;
@@ -27,7 +29,20 @@ const List = styled.ul`
 	padding: 10px;
 `;
 
-const Repositories = props => {
+const Container = styled.div`
+	width: 100%;
+	${flexCenter}
+`;
+
+const Button = styled.button`
+	padding: 10px;
+	background-color: transparent;
+	&:hover {
+		color: ${props => props.theme.colors.royalblue};
+	}
+`;
+
+const Repositories = () => {
 	const { submited, search } = useContext(SearchContext).state;
 	return (
 		<Section>
@@ -40,10 +55,14 @@ const Repositories = props => {
 			) : (
 				<Query
 					query={GET_REPOS_QUERY}
-					variables={{ user: search }}
+					variables={{
+						user: url(`${search}`)
+					}}
 					fetchPolicy='network-only'>
-					{({ data, loading, error }) =>
-						loading ? (
+					{({ data, loading, error, refetch }) => {
+						console.log(url(`${search}`));
+
+						return loading ? (
 							<RepositoryList>
 								<Loader />
 							</RepositoryList>
@@ -61,9 +80,29 @@ const Repositories = props => {
 										<RepositoryItem key={props.id} {...props} />
 									))}
 								</List>
+								<Container>
+									<Button
+										onClick={() =>
+											refetch({
+												user: data.user.prev.url
+											})
+										}
+										disabled={data.user.prev === null}>
+										prev
+									</Button>
+									<Button
+										onClick={() =>
+											refetch({
+												user: data.user.next.url
+											})
+										}
+										disabled={data.user.next === null}>
+										next
+									</Button>
+								</Container>
 							</RepositoryList>
-						)
-					}
+						);
+					}}
 				</Query>
 			)}
 		</Section>
