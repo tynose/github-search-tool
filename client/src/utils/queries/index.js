@@ -7,6 +7,16 @@ const GET_REPOS_QUERY = gql`
 			id
 			avatar
 			account
+			next {
+				url
+				page
+				rel
+			}
+			prev {
+				url
+				page
+				rel
+			}
 			repositories {
 				url
 				id
