@@ -1,6 +1,7 @@
 const graphql = require('graphql');
 const fetch = require('node-fetch');
 const parse = require('parse-link-header');
+require('dotenv').config();
 
 const {
 	GraphQLSchema,
@@ -105,7 +106,7 @@ const RootQuery = new GraphQLObjectType({
 				user: { type: GraphQLString }
 			},
 			resolve: async (root, args) => {
-				const response = await fetch(`${args.user}`);
+				const response = await fetch(`${args.user}${process.env.ACCESS_TOKEN}`);
 
 				const data = await response.json();
 				const link = response.headers.get('link');
