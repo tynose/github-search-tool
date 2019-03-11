@@ -7,7 +7,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "node server",
 		"start:dev": "nodemon server",
-		"init": "concurrently \"yarn\" \"cd client && yarn\"",
+		"init": "concurrently \"yarn\" \"cd client && yarn\" \"yarn run dev\"",
 		"dev": "concurrently \"yarn run start:dev\" \"cd client && yarn start\"",
 		"heroku-postbuild": "cd client && npm install && npm run build"
 	},
@@ -27,7 +27,8 @@
 		"express-graphql": "^0.7.1",
 		"graphql": "^14.1.1",
 		"node-fetch": "^2.3.0",
-		"nodemon": "^1.18.10"
+		"nodemon": "^1.18.10",
+		"parse-link-header": "^1.0.1"
 	},
 	"devDependencies": {
 		"concurrently": "^4.1.0"

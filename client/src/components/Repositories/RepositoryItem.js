@@ -8,6 +8,7 @@ import media from '../../utils/styles/media';
 
 const ListItem = styled.li`
 	list-style: none;
+	word-wrap: break-word;
 	padding-bottom: 30px;
 	margin-top: 30px;
 	width: calc(50% - 10px);
